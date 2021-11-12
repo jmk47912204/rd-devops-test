@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata: #Dictionary
+  name: rendertron-deployment
+  labels:
+    app: rendertron
+    tier: rendertron
+spec: # Dictionary
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rendertron
+  template:  
+    metadata: # Dictionary
+      name: rendertron-pod
+      labels: # Dictionary
+        app: rendertron  # Key value paids
+        tier: rendertron
+    spec:
+      containers: # List
+        - name: rendertron-container
+          image: jmk4791/real-digital-devops-test:development
+          ports: 
+            - containerPort: 3000
