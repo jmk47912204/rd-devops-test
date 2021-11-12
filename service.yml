@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service 
+metadata:
+  name: test
+  labels:
+    app: rendertron
+    tier: rendertron
+spec:
+  type: ClusterIP # ClusterIp, # NodePort, # LoadBalancer
+  selector:
+    app: rendertron
+  ports: 
+    - name: http
+      port: 80 # Service Port
+      targetPort: 3000 # Container Port
