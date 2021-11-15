@@ -1,24 +1,31 @@
 apiVersion: apps/v1
-kind: Deployment 
+kind: Deployment
 metadata: #Dictionary
   name: rendertron-deployment
   labels:
     app: rendertron
-    tier: rendertron
 spec: # Dictionary
   replicas: 2
   selector:
     matchLabels:
       app: rendertron
-  template:  
+  template:
     metadata: # Dictionary
       name: rendertron-pod
       labels: # Dictionary
         app: rendertron  # Key value paids
-        tier: rendertron
     spec:
       containers: # List
         - name: rendertron-container
-          image: jmk4791/real-digital-devops-test:development
-          ports: 
+          #image: jmk4791/real-digital-devops-test:development
+          image: jmk4791/rendertron:3.0
+          imagePullPolicy: Always
+          ports:
             - containerPort: 3000
+          resources:
+            requests:
+              cpu: "25m"
+              memory: "64Mi"
+            limits:
+              cpu: "100m"
+              memory: "128Mi"
