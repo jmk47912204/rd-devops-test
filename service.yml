@@ -1,12 +1,9 @@
 apiVersion: v1
 kind: Service 
 metadata:
-  name: test
-  labels:
-    app: rendertron
-    tier: rendertron
+  name: rendertron-svc
 spec:
-  type: ClusterIP # ClusterIp, # NodePort, # LoadBalancer
+  type: LoadBalancer # ClusterIP, # NodePort, # LoadBalancer
   selector:
     app: rendertron
   ports: 
