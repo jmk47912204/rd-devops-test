@@ -1,0 +1,46 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rendertron-deployment-hpa
+spec:
+  maxReplicas: 10 # define max replica count
+  minReplicas: 1  # define min replica count
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rendertron-deployment
+  targetCPUUtilizationPercentage: 20 # target CPU utilization
+
+# apiVersion: autoscaling/v2beta2
+# kind: HorizontalPodAutoscaler
+# metadata:
+#   name: nginx
+# spec:
+#   scaleTargetRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: nginx
+#   minReplicas: 1
+#   maxReplicas: 10
+#   metrics:
+#   - type: Resource
+#     resource:
+#       name: cpu
+#       target:
+#         type: Utilization
+#         averageUtilization: 50
+#   - type: Resource
+#     resource:
+#       name: memory
+#       target:
+#         type: AverageValue
+#         averageValue: 100Mi
+  # Uncomment these lines if you create the custom packets_per_second metric and
+  # configure your app to export the metric.
+  # - type: Pods
+  #   pods:
+  #     metric:
+  #       name: packets_per_second
+  #     target:
+  #       type: AverageValue
+  #       averageValue: 100
