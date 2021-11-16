@@ -2,11 +2,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rendertron-ingress
+  # annotations:
+  #   nginx.ingress.kubernetes.io/rewrite-target: /
+  #   ingress.kubernetes.io/whitelist-source-range: "1.1.1.1/24"
   annotations:
-    kubernetes.io/ingress.class: nginx  
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
 spec:  
   rules:
-  - http:
+  - host: whitelist.test.net
+    http:
       paths:
       - path: /
         pathType: Prefix
@@ -16,7 +21,26 @@ spec:
           service:
             name: rendertron-svc
             port:
-              number: 80          
+              number: 80        
+
+
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: fanout-ingress
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /v1/*
+#         backend:
+#           serviceName: web
+#           servicePort: 8080
+#       - path: /v2/*
+#         backend:
+#           serviceName: web2
+#           servicePort: 8080
+
 # apiVersion: networking.k8s.io/v1
 # kind: Ingress
 # metadata:
