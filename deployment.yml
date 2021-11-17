@@ -17,7 +17,6 @@ spec: # Dictionary
     spec:
       containers: # List
         - name: rendertron-container
-          #image: jmk4791/real-digital-devops-test:development
           image: jmk4791/rendertron:3.0
           imagePullPolicy: Always
           ports:
@@ -29,15 +28,15 @@ spec: # Dictionary
             limits:
               cpu: "200m"
               memory: "256Mi"
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8080
-          #   initialDelaySeconds: 15
-          #   periodSeconds: 10
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8080
-          #   initialDelaySeconds: 15
-          #   periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 10
