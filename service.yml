@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: rendertron-svc
 spec:
-  type: LoadBalancer # ClusterIP, # NodePort, # LoadBalancer
+  type: ClusterIP # ClusterIP, # NodePort, # LoadBalancer
   selector:
     app: rendertron
   ports: 
     - name: http
-      port: 80 # Service Port
+      port: 3000 # Service Port
       targetPort: 3000 # Container Port
